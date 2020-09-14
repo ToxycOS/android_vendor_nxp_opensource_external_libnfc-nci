@@ -45,7 +45,7 @@
 #include <android-base/stringprintf.h>
 #include <base/logging.h>
 #include <log/log.h>
-#include <metricslogger/metrics_logger.h>
+//#include <metricslogger/metrics_logger.h>
 
 #include "nfc_target.h"
 
@@ -591,8 +591,8 @@ void nfc_ncif_set_config_status(uint8_t* p, uint8_t len) {
 *******************************************************************************/
 void nfc_ncif_event_status(tNFC_RESPONSE_EVT event, uint8_t status) {
   tNFC_RESPONSE evt_data;
-  if (event == NFC_NFCC_TIMEOUT_REVT && status == NFC_STATUS_HW_TIMEOUT)
-    android::metricslogger::LogCounter("nfc_hw_timeout_error", 1);
+/*  if (event == NFC_NFCC_TIMEOUT_REVT && status == NFC_STATUS_HW_TIMEOUT)
+    android::metricslogger::LogCounter("nfc_hw_timeout_error", 1);*/
   if (nfc_cb.p_resp_cback) {
     evt_data.status = (tNFC_STATUS)status;
     (*nfc_cb.p_resp_cback)(event, &evt_data);
@@ -616,7 +616,7 @@ void nfc_ncif_error_status(uint8_t conn_id, uint8_t status) {
     nfc_conn.status = status;
     (*p_cb->p_cback)(conn_id, NFC_ERROR_CEVT, &nfc_conn);
   }
-  if (status == NFC_STATUS_TIMEOUT)
+/*  if (status == NFC_STATUS_TIMEOUT)
     android::metricslogger::LogCounter("nfc_rf_timeout_error", 1);
   else if (status == NFC_STATUS_EE_TIMEOUT)
     android::metricslogger::LogCounter("nfc_ee_timeout_error", 1);
@@ -631,7 +631,7 @@ void nfc_ncif_error_status(uint8_t conn_id, uint8_t status) {
   else if (status == NFC_STATUS_RF_PROTOCOL_ERR)
     android::metricslogger::LogCounter("nfc_rf_protocol_error", 1);
   else if (status == NFC_STATUS_EE_PROTOCOL_ERR)
-    android::metricslogger::LogCounter("nfc_ee_protocol_error", 1);
+    android::metricslogger::LogCounter("nfc_ee_protocol_error", 1);*/
 }
 
 /*******************************************************************************
